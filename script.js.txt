@@ -1,0 +1,43 @@
+const platforms = [
+    { name: "Netflix", link: "https://www.netflix.com" },
+    { name: "YouTube", link: "https://www.youtube.com" },
+    { name: "Shahid", link: "https://shahid.mbc.net" },
+    { name: "Amazon Prime", link: "https://www.primevideo.com" }
+];
+
+const container = document.getElementById("platforms");
+const search = document.getElementById("search");
+
+function displayPlatforms(list) {
+    container.innerHTML = "";
+
+    list.forEach(platform => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <h3>${platform.name}</h3>
+            <button onclick="openPlatform('${platform.link}')">
+                دخول المنصة
+            </button>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+function openPlatform(link) {
+    window.open(link, "_blank");
+}
+
+search.addEventListener("input", () => {
+    const value = search.value.toLowerCase();
+
+    const filtered = platforms.filter(p =>
+        p.name.toLowerCase().includes(value)
+    );
+
+    displayPlatforms(filtered);
+});
+
+displayPlatforms(platforms);
